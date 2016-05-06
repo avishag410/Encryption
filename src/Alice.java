@@ -23,7 +23,6 @@ public class Alice {
     	//cast lots each number in the arrays
     	for (int j=0 ; j<k ; j++){
     		puzzlesArray[j]= new Puzzle(RandomAnArray(puzzlesArray[j].getRiddle()),RandomAnArray(puzzlesArray[j].getPrivateKey()));
-    	
     	}
     	
     }
