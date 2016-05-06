@@ -1,4 +1,5 @@
 import java.io.PrintWriter;
+import javafx.util.Pair;
 
 /* Class AVLTree */
 class AVLTree
@@ -93,11 +94,11 @@ class AVLTree
         //Complete Your Code Here
     }
 
-    public int[] getPrivateKey(String sIndex) {
+    public Pair<int[],Integer> getPrivateKey(String sIndex) {
         //Complete Your Code Here
     }
 
-    private int[] getPrivateKey(AVLNode r, String sIndex) {
+    private Pair<int[],Integer> getPrivateKey(AVLNode r, String sIndex) {
         //Complete Your Code Here
     }
 }
