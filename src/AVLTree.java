@@ -165,7 +165,23 @@ class AVLTree
 
     private Pair<int[],Integer> getPrivateKey(AVLNode r, String sIndex) {
     	
-    	
-    	return new Pair(new Integer(1), new Integer(2));
+    	DecryptedPuzzle val = new DecryptedPuzzle(sIndex, null);
+    	int counter = 1;
+    	while(r != null){
+    		if(val.compareTo((DecryptedPuzzle)r.data) > 0){
+                r = r.right;
+    		}
+    		else if(val.compareTo((DecryptedPuzzle)r.data) < 0){
+                r = r.left;
+    		}
+            else{
+            	return new Pair<int[], Integer>
+            	(((DecryptedPuzzle)r.data).getPrivateKey(), new Integer(counter));
+            }
+    		
+    		counter++;
+    		
+    	}
+    	return null;
     }
 }
