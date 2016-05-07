@@ -30,7 +30,7 @@ public class Alice {
         //Complete Your Code Here
     }
 
-    public int[] RandomAnArray(int[] arr){
+    private int[] RandomAnArray(int[] arr){
     	int N=arr.length; 
     	int randomIndx,tmp;
     	
