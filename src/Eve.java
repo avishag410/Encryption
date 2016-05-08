@@ -7,17 +7,16 @@ import java.io.*;
  */
 public class Eve {
 	
-	//Add Fields if needed
-
-    public Eve(){}
+    public Eve(){
+    	
+    }
 
     public Pair<String, Integer> findKey(String index, Puzzle[] puzzles){
-		//Complete Your Code Here
-
+    	return PuzzleUtils.findKey(index, puzzles);
     }
 
     public Pair<String, String> solvePuzzle(Puzzle puz){
-        //Complete Your Code Here
+    	return PuzzleUtils.solvePuzzle(puz);
     }
 
 }
