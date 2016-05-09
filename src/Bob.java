@@ -4,10 +4,11 @@ import java.io.*;
 
 public class Bob {
 
-	private Puzzle currPuzzle;
+	private Puzzle binaryPuzzle,xorPuzzle,currPuzzle;
     public Bob(){
-        //Complete Your Code 
-    	
+        binaryPuzzle=null; 
+    	xorPuzzle=null;
+    	currPuzzle=null;
     }
 
     public Pair<String, String> choosePuzzle(Puzzle[] puzzles){
@@ -16,11 +17,18 @@ public class Bob {
 
     public Pair<String, String> solvePuzzle(Puzzle puz){
         int[] serialNum=puz.getPrivateKey(),key=puz.getRiddle(); //Initialize arrays
-        
+        currPuzzle= new Puzzle(mergeSort(serialNum),mergeSort(key));//Sort
         
         
     }
-    
+    private String convertToBinary(int num){
+    	String ans="";
+    	while(num>0){
+    		ans+=(num%2);
+    		num/=2;
+    	}
+    	return ans;
+    }
     private int[] mergeSort(int[] arr){
     	if(arr.length<2)
     		return arr;
@@ -69,6 +77,8 @@ public class Bob {
     	}
     	return ans;
     }
+    
+    
  }
     
     
