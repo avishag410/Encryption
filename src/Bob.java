@@ -4,15 +4,12 @@ import java.io.*;
 
 public class Bob {
 
-<<<<<<< HEAD
+
 	private Puzzle binaryPuzzle,xorPuzzle,currPuzzle;
     public Bob(){
         binaryPuzzle=null; 
     	xorPuzzle=null;
     	currPuzzle=null;
-=======
-    public Bob(){
->>>>>>> e1dde1deee90ebff4c128f9db2126b20ba0949e0
     }
 
     public Pair<String, String> choosePuzzle(Puzzle[] puzzles){
@@ -21,7 +18,7 @@ public class Bob {
     }
 
     public Pair<String, String> solvePuzzle(Puzzle puz){
-<<<<<<< HEAD
+
         int[] serialNum=puz.getPrivateKey(),key=puz.getRiddle(); //Initialize arrays
         currPuzzle= new Puzzle(mergeSort(serialNum),mergeSort(key));//Sort
         
@@ -88,8 +85,8 @@ public class Bob {
  }
     
     
-=======
+
         return PuzzleUtils.solvePuzzle(puz);
     }
 }
->>>>>>> e1dde1deee90ebff4c128f9db2126b20ba0949e0
+
