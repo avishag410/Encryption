@@ -163,6 +163,9 @@ class AVLTree
         return getPrivateKey(root, sIndex);
     }
 
+    /*
+     * TODO:Shouldn't be in AvlNode class?
+     */
     private Pair<int[],Integer> getPrivateKey(AVLNode r, String sIndex) {
     	
     	DecryptedPuzzle val = new DecryptedPuzzle(sIndex, null);

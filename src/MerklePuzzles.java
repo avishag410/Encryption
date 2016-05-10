@@ -9,7 +9,7 @@ public class MerklePuzzles {
 	        eve = new Eve();
 	        key = null;
 	        privateKey = null;
-		fullTest(2,2);
+	        fullTest(2,2);
 	}
 	    private static Alice alice;
 	    private static Bob bob;

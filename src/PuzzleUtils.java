@@ -1,5 +1,11 @@
 import javafx.util.Pair;
 
+/**
+ * Util class in order to avoid code duplication at classes: Bob & Eve
+ * 
+ * 
+ *
+ */
 public class PuzzleUtils {
 	public static Pair<String, String> solvePuzzle(Puzzle puz){
 		int[] riddleSorted = SortPuzzleArray(puz.getRiddle());
@@ -50,5 +56,14 @@ public class PuzzleUtils {
 		result += number;
 		
 		return "" + (result%2);
+	}
+	
+	public static void main(String args[]){
+		int arr[]={81,99,-5,4,9,63,87,0,-1111,12,11,10};
+		int p[]=SortPuzzleArray(arr);
+		for(int i=0;i<p.length;i++){
+			System.out.print(p[i]+" ");
+		}
+		
 	}
 }

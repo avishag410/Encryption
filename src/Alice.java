@@ -4,10 +4,11 @@ import javafx.util.Pair;
 public class Alice {
 
     private Puzzle [] puzzlesArray;
-    //Add Fields if needed
+    private AVLTree AliceTree;
+    private DecryptedPuzzle[] AlicePuzzles;
 
     public Alice(){
-    	
+    	AliceTree=new AVLTree();
     }
 
     public Puzzle[] getPuzzlesCopy(){
@@ -20,16 +21,44 @@ public class Alice {
 
     public void createPuzzles(int n, int k){
     	puzzlesArray=new Puzzle[k];
-    	//cast lots each number in the arrays
-    	for (int j=0 ; j<k ; j++){
+    	AlicePuzzles=new DecryptedPuzzle[k];
+    	int j;
+    	
+    	//create each number in the arrays
+    	for ( j=0 ; j<k ; j++){
     		puzzlesArray[j]= new Puzzle(RandomAnArray(puzzlesArray[j].getRiddle()),RandomAnArray(puzzlesArray[j].getPrivateKey()));
     	}
+    	//InitAlicePuzzles
+    	InitAlicePuzzles();
+    	//Insertion to avltree.Each node contains DecryptedPuzzle
+    	for(j=0;j<AlicePuzzles.length;j++){
+    		AliceTree.insert(AlicePuzzles[j]);
+    	}
+    	
     	
     }
     public Pair<String, Integer> findKey(String sIndex){
-        //Complete Your Code Here
+    	Pair<int[],Integer> arrayAns=AliceTree.getPrivateKey(sIndex);
+    	int[] key=arrayAns.getKey();
+    	
+    	return new Pair<String,Integer> (ConvertArraytoString(key),arrayAns.getValue());
     }
 
+    private void InitAlicePuzzles(){
+    	//convert from puzzleArray to DecryptedPuzzle
+    	for(int i=0;i<AlicePuzzles.length;i++){
+    		AlicePuzzles[i].serialNumber=ConvertArraytoString(puzzlesArray[i].getRiddle());
+    		AlicePuzzles[i].privateKey=puzzlesArray[i].getPrivateKey();
+    	}
+    }
+    
+    private String ConvertArraytoString(int[] arr){
+    	String ans="";
+    	for(int i=0;i<arr.length;i++){
+    		ans=ans+arr[i];
+    	}
+    	return ans;
+    }
     private int[] RandomAnArray(int[] arr){
     	int N=arr.length; 
     	int randomIndx,tmp;
