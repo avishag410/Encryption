@@ -1,7 +1,3 @@
-import javafx.util.Pair;
-
-import java.io.*;
-
 public class Bob {
 
     public Bob(){

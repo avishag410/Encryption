@@ -1,5 +1,3 @@
-import javafx.util.Pair;
-
 public class MerklePuzzles {
 
 	public static void main(String[] args) {
@@ -9,7 +7,7 @@ public class MerklePuzzles {
 	        eve = new Eve();
 	        key = null;
 	        privateKey = null;
-	        fullTest(100,5000);
+	        fullTest(100,20000);
 	}
 	    private static Alice alice;
 	    private static Bob bob;

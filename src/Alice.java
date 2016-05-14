@@ -1,6 +1,3 @@
-import javafx.util.Pair;
-
-
 public class Alice {
 
     private Puzzle [] puzzlesArray;
@@ -28,7 +25,7 @@ public class Alice {
     		int[] privateKey = RandomAnArray(n);
     		
     		// solve the riddle in order to save it on the tree
-    		String riddleString = PuzzleUtils.SolveArray(riddle);
+    		String riddleString = PuzzleUtils.SolveSortedArray(riddle);
     		DecryptedPuzzle decrypted = new DecryptedPuzzle(riddleString, privateKey);
     		
     		// search if the riddle number already exists
@@ -51,7 +48,7 @@ public class Alice {
     	int[] key=arrayAns.getKey();
     	
     	// solve the array
-    	String solvedKey = PuzzleUtils.SolveArray(key);
+    	String solvedKey = PuzzleUtils.SolveSortedArray(key);
     	
     	return new Pair<String,Integer> (solvedKey, arrayAns.getValue());
     }

@@ -1,5 +1,3 @@
-import javafx.util.Pair;
-
 /**
  * Util class in order to avoid code duplication at classes: Bob, Alice & Eve
  */
@@ -13,6 +11,10 @@ public class PuzzleUtils {
 	
 	public static String SolveArray(int[] arr){
 		int[] sorted = SortPuzzleArray(arr);
+		return SolveSortedArray(sorted);
+	}
+	
+	public static String SolveSortedArray(int[] sorted){
 		String ans = "";
 		for(int index = 0; index < sorted.length; index++){
 			ans += XorToOneNumber(sorted[index]);

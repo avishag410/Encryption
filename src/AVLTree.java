@@ -1,5 +1,4 @@
 import java.io.PrintWriter;
-import javafx.util.Pair;
 
 /* Class AVLTree */
 class AVLTree
