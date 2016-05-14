@@ -5,7 +5,6 @@ public class Alice {
 
     private Puzzle [] puzzlesArray;
     private AVLTree AliceTree;
-    private DecryptedPuzzle[] AlicePuzzles;
 
     public Alice(){
     	AliceTree=new AVLTree();
@@ -21,62 +20,74 @@ public class Alice {
 
     public void createPuzzles(int n, int k){
     	puzzlesArray=new Puzzle[k];
-    	AlicePuzzles=new DecryptedPuzzle[k];
-    	int j;
     	
-    	//create each number in the arrays
-    	for ( j=0 ; j<k ; j++){
-    		puzzlesArray[j]= new Puzzle(RandomAnArray(puzzlesArray[j].getRiddle()),RandomAnArray(puzzlesArray[j].getPrivateKey()));
+    	int index = 0;
+    	while(index < k){
+    		// Get random values for the arrays
+    		int[] riddle = RandomAnArray(n);
+    		int[] privateKey = RandomAnArray(n);
+    		
+    		// solve the riddle in order to save it on the tree
+    		String riddleString = PuzzleUtils.SolveArray(riddle);
+    		DecryptedPuzzle decrypted = new DecryptedPuzzle(riddleString, privateKey);
+    		
+    		// search if the riddle number already exists
+    		if(!AliceTree.search(decrypted)){
+    			// insert only if the riddle number is new
+    			AliceTree.insert(decrypted);
+    			// shuffle the arrays
+    			int[] shuffRiddle = ShuffleArray(riddle);
+    			int[] shuffPrivateKey = ShuffleArray(privateKey);
+    			//Save the puzzles
+    			Puzzle puzz = new Puzzle(shuffPrivateKey, shuffRiddle);
+    			puzzlesArray[index] = puzz;
+    			index++;
+    		}
     	}
-    	//InitAlicePuzzles
-    	InitAlicePuzzles();
-    	//Insertion to avltree.Each node contains DecryptedPuzzle
-    	for(j=0;j<AlicePuzzles.length;j++){
-    		AliceTree.insert(AlicePuzzles[j]);
-    	}
-    	
-    	
     }
     public Pair<String, Integer> findKey(String sIndex){
-    	Pair<int[],Integer> arrayAns=AliceTree.getPrivateKey(sIndex);
+    	// Search the private key
+    	Pair<int[],Integer> arrayAns = AliceTree.getPrivateKey(sIndex);
     	int[] key=arrayAns.getKey();
     	
-    	return new Pair<String,Integer> (ConvertArraytoString(key),arrayAns.getValue());
-    }
-
-    private void InitAlicePuzzles(){
-    	//convert from puzzleArray to DecryptedPuzzle
-    	for(int i=0;i<AlicePuzzles.length;i++){
-    		AlicePuzzles[i].serialNumber=ConvertArraytoString(puzzlesArray[i].getRiddle());
-    		AlicePuzzles[i].privateKey=puzzlesArray[i].getPrivateKey();
-    	}
+    	// solve the array
+    	String solvedKey = PuzzleUtils.SolveArray(key);
+    	
+    	return new Pair<String,Integer> (solvedKey, arrayAns.getValue());
     }
     
-    private String ConvertArraytoString(int[] arr){
-    	String ans="";
-    	for(int i=0;i<arr.length;i++){
-    		ans=ans+arr[i];
+    private int[] ShuffleArray(int[] arr){
+    	int[] shuffled = new int[arr.length];
+    	// copy the sorted array in order to shuffle it
+    	for(int i=0; i<arr.length; i++){
+    		shuffled[i] = arr[i];
     	}
-    	return ans;
+    	
+    	// shuffle
+    	int max = arr.length -1;
+    	for(int i=0;i< arr.length ;i++){
+    		int min = i;
+    		// get a random number between index and length -1
+    		int randomIndx=(int)(Math.random() * (max - min)) + min;
+    		int temp = shuffled[randomIndx];
+    		
+    		// swap the values
+    		shuffled[randomIndx]=shuffled[i];
+    		shuffled[i]=temp;
+    	}
+    	
+    	return arr;
     }
-    private int[] RandomAnArray(int[] arr){
-    	int N=arr.length; 
-    	int randomIndx,tmp;
+    	
+    private int[] RandomAnArray(int N){
+    	int[] arr = new int[N];
     	
     	// random a number in range [(i-1)N^3,iN^3) for each cell
-    	for (int i=0;i<N;i++){
-    		arr[i]=(int)(Math.random()*(N^3)+((i-1)*N^3));
+    	for (int i=1;i<=N;i++){
+    		int max = i*((int)Math.pow(N, 3));
+    		int min = (i-1)*((int)Math.pow(N, 3));
+    		arr[i-1]=(int)(Math.random() * (max - min)) + min;
     	}
-    	// shuffle
-    	for(int i=0;i<N;i++){
-    		randomIndx=(int)Math.random()*N +i;
-    		
-    		tmp=arr[randomIndx];
-    		arr[randomIndx]=arr[i];
-    		arr[i]=tmp;
- 
-    	}
-    	
     	return arr;
     }
 

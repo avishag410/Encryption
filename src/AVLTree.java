@@ -47,7 +47,7 @@ class AVLTree
     private AVLNode insert(Comparable x, AVLNode t)
     {
     	if(t == null){
-            t = new AVLNode();
+            t = new AVLNode(x);
     	}
         else if(x.compareTo(t.data) > 0){
             t.right = insert(x, t.right);
